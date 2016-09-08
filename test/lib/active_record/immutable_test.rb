@@ -74,4 +74,10 @@ class ActiveRecord::ImmutableTest < MiniTest::Unit::TestCase
     end
   end
 
+  def test_update_all_raises_error
+    assert_raises(ActiveRecord::ReadOnlyRecord) do
+      DomainEvent.update_all(created_at: Time.now)
+    end
+  end
+
 end

@@ -13,6 +13,10 @@ module ActiveRecord
         def self.delete_all
           raise_read_only_error
         end
+
+        def self.update_all(updates)
+          raise_read_only_error
+        end
       end
     end
 
