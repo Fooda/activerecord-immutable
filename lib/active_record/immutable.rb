@@ -20,7 +20,10 @@ module ActiveRecord
       end
     end
 
+    attr_accessor :override
+
     def readonly?
+      return false if override
       changes.present? && persisted?
     end
 
@@ -29,6 +32,14 @@ module ActiveRecord
     end
 
     def delete
+      raise_read_only_error
+    end
+
+    def update_column(name, value)
+      raise_read_only_error
+    end
+
+    def update_columns(attributes)
       raise_read_only_error
     end
 
